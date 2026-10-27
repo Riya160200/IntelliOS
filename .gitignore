@@ -1,20 +1,29 @@
-
----
-
-### .gitignore
-
-```gitignore
-# Ignore compiled binaries
+# Compiled binaries and executables
 ai_shell
+ai_shell.exe
 *.o
+*.obj
+*.exe
 
-# Ignore Python virtual environments
-venv/
+# Environment & sensitive secrets
 .env
+.env.local
+*.env
 
-# Ignore editor and system files
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Editor and OS files
 *.swp
 *.swo
 .DS_Store
 .idea/
 .vscode/
+
+# Temporary logs & scratch
+*.log
+scratch/

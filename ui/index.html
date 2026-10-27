@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliShell - AI-Powered Terminal Shell</title>
+    <meta name="description" content="IntelliShell is an intelligent natural-language command-line shell interface built with C++, Python, and Google Gemini AI.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Ambient Glows -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Main Container -->
+    <div class="app-layout">
+        <!-- Top Navigation Bar -->
+        <header class="top-nav">
+            <div class="brand-section">
+                <div class="brand-icon">
+                    <span class="icon-pulse"></span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-title">IntelliShell <span class="badge-version">v2.5</span></div>
+                    <div class="brand-tagline">AI-Powered Operating System Shell</div>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <!-- OS Environment Toggle -->
+                <div class="os-selector">
+                    <span class="selector-label">Target OS:</span>
+                    <button id="os-win" class="btn-toggle active" data-os="windows">
+                        <span class="os-dot win-dot"></span> Windows (PowerShell)
+                    </button>
+                    <button id="os-linux" class="btn-toggle" data-os="linux">
+                        <span class="os-dot linux-dot"></span> Linux (/bin/sh)
+                    </button>
+                </div>
+
+                <!-- Kernel Status Pill -->
+                <div class="status-pill">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">AI KERNEL ONLINE</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="content-grid">
+            <!-- Left & Center: Interactive Shell Console -->
+            <section class="terminal-container">
+                <!-- Terminal Window Chrome -->
+                <div class="terminal-header">
+                    <div class="window-controls">
+                        <span class="dot dot-close"></span>
+                        <span class="dot dot-minimize"></span>
+                        <span class="dot dot-expand"></span>
+                    </div>
+                    <div class="terminal-title">
+                        <span class="session-user">user@host</span>:<span class="session-path">~/Downloads/OS CP 2/IntelliShell</span>
+                    </div>
+                    <div class="terminal-actions">
+                        <button id="btn-clear-term" class="btn-icon" title="Clear Screen">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Terminal Scrollable Feed -->
+                <div class="terminal-body" id="terminal-feed">
+                    <!-- Welcome Card -->
+                    <div class="terminal-welcome">
+                        <pre class="ascii-art">
+   ___     __       ____     _____ __         ____
+  / (_)___/ /____  / / /_   / ___// /_  ___  / / /
+ / / / __  / ___/ / / / /   \__ \/ __ \/ _ \/ / / 
+/ / / /_/ / /    / / / /   ___/ / / / /  __/ / /  
+/_/_/\__,_/_/    /_/_/_/  /____/_/ /_/\___/_/_/   
+                        </pre>
+                        <div class="welcome-desc">
+                            <span class="highlight-cyan">[AI Shell Engine Active]</span> Natural language to low-level operating system command generator.<br>
+                            Type your request in plain English below, review the suggestion, and execute securely.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Dock & Suggestion Chips -->
+                <div class="terminal-input-dock">
+                    <!-- Quick Prompt Suggestions -->
+                    <div class="quick-chips">
+                        <span class="chips-label">Suggestions:</span>
+                        <button class="chip" data-prompt="show all files in the current folder">📂 show all files</button>
+                        <button class="chip" data-prompt="show my ip address">🌐 show my ip</button>
+                        <button class="chip" data-prompt="check free disk space">💾 check disk space</button>
+                        <button class="chip" data-prompt="show running processes">⚡ running processes</button>
+                        <button class="chip" data-prompt="where am i">📍 where am i</button>
+                        <button class="chip chip-danger" data-prompt="delete a file">⚠️ delete a file (safety check)</button>
+                    </div>
+
+                    <!-- Prompt Input Form -->
+                    <form id="prompt-form" class="prompt-input-wrapper">
+                        <div class="prompt-symbol">
+                            <span class="arrow">❯</span>
+                        </div>
+                        <input 
+                            type="text" 
+                            id="user-input" 
+                            class="prompt-input" 
+                            placeholder="Type what you want to do in English... (e.g. 'show all files in current folder')" 
+                            autocomplete="off" 
+                            autofocus
+                        />
+                        <button type="submit" id="btn-submit" class="btn-send">
+                            <span>Ask Shell</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Right: OS Concepts in Action & Metrics Dashboard -->
+            <aside class="sidebar-dashboard">
+                <!-- OS Concept Live Visualizer -->
+                <div class="card-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                            <span>OS Concepts in Action</span>
+                        </div>
+                        <span class="badge-live">LIVE TRACKER</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="os-badge-list">
+                            <div class="os-card" id="card-ipc">
+                                <div class="os-card-icon">🔀</div>
+                                <div class="os-card-info">
+                                    <div class="os-card-name">Inter-Process Pipes (IPC)</div>
+                                    <div class="os-card-desc">Streams JSON across Anonymous Kernel Pipes between C++ and Python.</div>
+                                </div>
+                            </div>
+
+                            <div class="os-card" id="card-proc">
+                                <div class="os-card-icon">⚙️</div>
+                                <div class="os-card-info">
+                                    <div class="os-card-name">Process Lifecycle Management</div>
+                                    <div class="os-card-desc">Spawns child processes using CreateProcessA / fork() & exec().</div>
+                                </div>
+                            </div>
+
+                            <div class="os-card" id="card-redirection">
+                                <div class="os-card-icon">🔄</div>
+                                <div class="os-card-info">
+                                    <div class="os-card-name">Standard I/O Redirection</div>
+                                    <div class="os-card-desc">Remaps STDIN and STDOUT handles via STARTF_USESTDHANDLES / dup2().</div>
+                                </div>
+                            </div>
+
+                            <div class="os-card" id="card-sync">
+                                <div class="os-card-icon">⏳</div>
+                                <div class="os-card-info">
+                                    <div class="os-card-name">Process Synchronization</div>
+                                    <div class="os-card-desc">Parent waits on child exit with WaitForSingleObject / waitpid to prevent zombies.</div>
+                                </div>
+                            </div>
+
+                            <div class="os-card" id="card-syscalls">
+                                <div class="os-card-icon">📁</div>
+                                <div class="os-card-info">
+                                    <div class="os-card-name">File System System Calls</div>
+                                    <div class="os-card-desc">Direct kernel calls: _chdir(), _getcwd(), and getenv() for context.</div>
+                                </div>
+                            </div>
+
+                            <div class="os-card" id="card-security">
+                                <div class="os-card-icon">🛡️</div>
+                                <div class="os-card-info">
+                                    <div class="os-card-name">Security & Protection Ring</div>
+                                    <div class="os-card-desc">Pre-execution regex interception for fork bombs, wipes, & formatting.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Session Commands -->
+                <div class="card-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                            <span>Recent Session Commands</span>
+                        </div>
+                        <button id="btn-clear-history" class="btn-text">Clear</button>
+                    </div>
+                    <div class="panel-body">
+                        <ul id="history-list" class="history-list">
+                            <li class="history-empty">No commands executed yet</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Edit Command Modal Dialog -->
+    <div id="edit-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Command Before Execution</h3>
+                <button id="btn-close-modal" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>You can fine-tune the flags or parameters before the operating system runs it:</p>
+                <div class="edit-input-wrapper">
+                    <span class="edit-symbol">$</span>
+                    <input type="text" id="modal-command-input" class="modal-input" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-modal-cancel" class="btn-secondary">Cancel</button>
+                <button id="btn-modal-run" class="btn-primary">Execute Edited Command</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
