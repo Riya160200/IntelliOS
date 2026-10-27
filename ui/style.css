@@ -774,8 +774,12 @@ body {
 }
 
 .os-card-icon {
-    font-size: 1rem;
-    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-cyan);
+    margin-top: 2px;
+    flex-shrink: 0;
 }
 
 .os-card-name {

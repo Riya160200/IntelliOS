@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         row.innerHTML = `
             <div class="suggestion-card">
                 <div class="card-header-badge">
-                    <span class="badge-suggestion">✦ Recommended Command</span>
+                    <span class="badge-suggestion">Recommended Command</span>
                     <div style="display:flex; gap:6px;">
                         <span class="badge-tag">${sourceBadge}</span>
                         <span class="badge-tag">${tagText}</span>
@@ -359,8 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Replace controls with done badge
         if (controls) {
             controls.innerHTML = `
-                <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-emerald); font-weight:600;">
-                    ✓ Executed with exit code ${result.returncode}
+                <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-emerald); font-weight:600; display:inline-flex; align-items:center; gap:5px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Executed with exit code ${result.returncode}
                 </span>
             `;
         }

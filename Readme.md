@@ -1,4 +1,4 @@
-# IntelliOS / IntelliShell ⚡
+# IntelliOS / IntelliShell
 
 **IntelliOS** is an AI-powered interactive terminal and operating system shell built with **C++17**, **Python**, and **Google Gemini AI**. It translates natural-language plain English instructions into precise operating system commands, verifies safety ring restrictions, and executes them with full process synchronization.
 
@@ -6,7 +6,7 @@ It includes both a **native C++ terminal shell** and a **modern Glassmorphic Web
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 * **Natural Language Command Translation**: Type what you want to do in plain English (e.g., *"show all files in current folder"*, *"check free disk space"*, *"show my ip address"*), and the AI translates it to native shell commands.
 * **Cross-Platform**: Full native support for **Windows (PowerShell/CMD)** and **Linux (/bin/sh)**.
@@ -26,7 +26,7 @@ It includes both a **native C++ terminal shell** and a **modern Glassmorphic Web
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Configure API Key (Optional)
 Copy `.env.example` to `.env` and add your Gemini API key:
@@ -42,7 +42,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🖥️ Running the Application
+## Running the Application
 
 ### Option A: Modern Web UI (Recommended)
 Double-click or run:
@@ -73,7 +73,7 @@ make
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 ├── ai_shell.cpp            # Core C++ interactive shell engine (Win32 & POSIX)
@@ -92,5 +92,5 @@ make
 
 ---
 
-## 📄 License
+## License
 MIT License.

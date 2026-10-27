@@ -99,12 +99,12 @@
                     <!-- Quick Prompt Suggestions -->
                     <div class="quick-chips">
                         <span class="chips-label">Suggestions:</span>
-                        <button class="chip" data-prompt="show all files in the current folder">📂 show all files</button>
-                        <button class="chip" data-prompt="show my ip address">🌐 show my ip</button>
-                        <button class="chip" data-prompt="check free disk space">💾 check disk space</button>
-                        <button class="chip" data-prompt="show running processes">⚡ running processes</button>
-                        <button class="chip" data-prompt="where am i">📍 where am i</button>
-                        <button class="chip chip-danger" data-prompt="delete a file">⚠️ delete a file (safety check)</button>
+                        <button class="chip" data-prompt="show all files in the current folder">show all files</button>
+                        <button class="chip" data-prompt="show my ip address">show my ip</button>
+                        <button class="chip" data-prompt="check free disk space">check disk space</button>
+                        <button class="chip" data-prompt="show running processes">running processes</button>
+                        <button class="chip" data-prompt="where am i">where am i</button>
+                        <button class="chip chip-danger" data-prompt="delete a file">delete a file (safety check)</button>
                     </div>
 
                     <!-- Prompt Input Form -->
@@ -145,7 +145,9 @@
                     <div class="panel-body">
                         <div class="os-badge-list">
                             <div class="os-card" id="card-ipc">
-                                <div class="os-card-icon">🔀</div>
+                                <div class="os-card-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+                                </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">Inter-Process Pipes (IPC)</div>
                                     <div class="os-card-desc">Streams JSON across Anonymous Kernel Pipes between C++ and Python.</div>
@@ -153,7 +155,9 @@
                             </div>
 
                             <div class="os-card" id="card-proc">
-                                <div class="os-card-icon">⚙️</div>
+                                <div class="os-card-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                                </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">Process Lifecycle Management</div>
                                     <div class="os-card-desc">Spawns child processes using CreateProcessA / fork() & exec().</div>
@@ -161,7 +165,9 @@
                             </div>
 
                             <div class="os-card" id="card-redirection">
-                                <div class="os-card-icon">🔄</div>
+                                <div class="os-card-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">Standard I/O Redirection</div>
                                     <div class="os-card-desc">Remaps STDIN and STDOUT handles via STARTF_USESTDHANDLES / dup2().</div>
@@ -169,7 +175,9 @@
                             </div>
 
                             <div class="os-card" id="card-sync">
-                                <div class="os-card-icon">⏳</div>
+                                <div class="os-card-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">Process Synchronization</div>
                                     <div class="os-card-desc">Parent waits on child exit with WaitForSingleObject / waitpid to prevent zombies.</div>
@@ -177,7 +185,9 @@
                             </div>
 
                             <div class="os-card" id="card-syscalls">
-                                <div class="os-card-icon">📁</div>
+                                <div class="os-card-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">File System System Calls</div>
                                     <div class="os-card-desc">Direct kernel calls: _chdir(), _getcwd(), and getenv() for context.</div>
@@ -185,7 +195,9 @@
                             </div>
 
                             <div class="os-card" id="card-security">
-                                <div class="os-card-icon">🛡️</div>
+                                <div class="os-card-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">Security & Protection Ring</div>
                                     <div class="os-card-desc">Pre-execution regex interception for fork bombs, wipes, & formatting.</div>
