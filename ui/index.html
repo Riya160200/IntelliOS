@@ -3,74 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IntelliShell - AI-Powered Terminal Shell</title>
-    <meta name="description" content="IntelliShell is an intelligent natural-language command-line shell interface built with C++, Python, and Google Gemini AI.">
+    <title>IntelliOS - AI Terminal & Operating System Shell</title>
+    <meta name="description" content="IntelliOS is an AI-powered operating system terminal shell with low-level kernel IPC, process supervision, and safety protection.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Background Ambient Glows -->
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
-    <div class="ambient-glow glow-3"></div>
+<body class="canvas-bg">
 
-    <!-- Main Container -->
-    <div class="app-layout">
+    <!-- Outer Studio Frame Container -->
+    <div class="board-frame">
+
         <!-- Top Navigation Bar -->
         <header class="top-nav">
-            <div class="brand-section">
-                <div class="brand-icon">
-                    <span class="icon-pulse"></span>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="4 17 10 11 4 5"></polyline>
-                        <line x1="12" y1="19" x2="20" y2="19"></line>
-                    </svg>
-                </div>
-                <div class="brand-text">
-                    <div class="brand-title">IntelliShell <span class="badge-version">v2.5</span></div>
-                    <div class="brand-tagline">AI-Powered Operating System Shell</div>
-                </div>
+            <!-- Brand Pill -->
+            <div class="brand-pill">
+                <div class="brand-dot"></div>
+                <span class="brand-name">IntelliOS</span>
             </div>
 
-            <div class="nav-controls">
-                <!-- OS Environment Toggle -->
+            <!-- Center Navigation Strip -->
+            <nav class="nav-pill-strip">
+                <button class="nav-pill active" type="button">Dashboard</button>
+                <button class="nav-pill" type="button" onclick="document.getElementById('user-input').focus()">Terminal</button>
+                <button class="nav-pill" type="button" onclick="document.getElementById('card-proc').scrollIntoView({behavior:'smooth'})">Processes</button>
+                <button class="nav-pill" type="button" onclick="document.getElementById('card-syscalls').scrollIntoView({behavior:'smooth'})">Syscalls</button>
+                <button class="nav-pill" type="button" onclick="document.getElementById('card-security').scrollIntoView({behavior:'smooth'})">Security</button>
+                <button class="nav-pill" type="button" onclick="document.getElementById('card-ipc').scrollIntoView({behavior:'smooth'})">IPC Pipes</button>
+                <a href="/IntelliShell_Project_Report.pdf" target="_blank" class="nav-pill nav-pill-link">Report</a>
+            </nav>
+
+            <!-- Right Controls -->
+            <div class="nav-actions">
+                <!-- Target OS Switcher -->
                 <div class="os-selector">
-                    <span class="selector-label">Target OS:</span>
-                    <button id="os-win" class="btn-toggle active" data-os="windows">
-                        <span class="os-dot win-dot"></span> Windows (PowerShell)
+                    <button id="os-win" class="btn-toggle active" data-os="windows" type="button">
+                        <span class="os-dot win-dot"></span> Windows
                     </button>
-                    <button id="os-linux" class="btn-toggle" data-os="linux">
-                        <span class="os-dot linux-dot"></span> Linux (/bin/sh)
+                    <button id="os-linux" class="btn-toggle" data-os="linux" type="button">
+                        <span class="os-dot linux-dot"></span> Linux
                     </button>
                 </div>
 
-                <!-- Kernel Status Pill -->
-                <div class="status-pill">
-                    <span class="status-indicator"></span>
-                    <span class="status-text">AI KERNEL ONLINE</span>
+                <!-- Action Icon Buttons -->
+                <button class="icon-circle-btn" title="Kernel Settings" type="button">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span class="setting-text">Setting</span>
+                </button>
+
+                <button class="icon-circle-btn icon-only" title="Kernel Notifications" type="button">
+                    <span class="active-badge-dot"></span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </button>
+
+                <div class="user-avatar-pill" title="Supervisor Ring 0">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content Grid -->
+        <!-- Hero Welcome & OS Metrics Strip -->
+        <section class="hero-overview">
+            <div class="hero-title-area">
+                <h1 class="hero-heading">Welcome in, IntelliOS</h1>
+                <div class="hero-subrow">
+                    <!-- Progress Pill Segments -->
+                    <div class="pill-segments-bar">
+                        <div class="segment-pill seg-dark">
+                            <span class="seg-label">Kernel</span>
+                            <span class="seg-val">Active</span>
+                        </div>
+                        <div class="segment-pill seg-yellow">
+                            <span class="seg-label">Ring 0</span>
+                            <span class="seg-val">Safe</span>
+                        </div>
+                        <div class="segment-pill seg-striped">
+                            <span class="seg-val">IPC Stream</span>
+                        </div>
+                        <div class="segment-pill seg-outline">
+                            <span class="seg-label">AI Fallback</span>
+                            <span class="seg-val">Ready</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Metrics Counters -->
+                    <div class="hero-counters">
+                        <div class="counter-item">
+                            <div class="counter-val-row">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                <span class="counter-num">78</span>
+                            </div>
+                            <span class="counter-tag">Processes</span>
+                        </div>
+
+                        <div class="counter-item">
+                            <div class="counter-val-row">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                <span class="counter-num">56</span>
+                            </div>
+                            <span class="counter-tag">Syscalls</span>
+                        </div>
+
+                        <div class="counter-item">
+                            <div class="counter-val-row">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="4 17 10 11 4 5"></polyline>
+                                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                                </svg>
+                                <span class="counter-num">203</span>
+                            </div>
+                            <span class="counter-tag">Commands</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Content Grid -->
         <main class="content-grid">
-            <!-- Left & Center: Interactive Shell Console -->
+
+            <!-- Left: Interactive Shell Terminal Console -->
             <section class="terminal-container">
                 <!-- Terminal Window Chrome -->
                 <div class="terminal-header">
                     <div class="window-controls">
-                        <span class="dot dot-close"></span>
-                        <span class="dot dot-minimize"></span>
-                        <span class="dot dot-expand"></span>
+                        <span class="dot dot-close" title="Close"></span>
+                        <span class="dot dot-minimize" title="Minimize"></span>
+                        <span class="dot dot-expand" title="Expand"></span>
                     </div>
                     <div class="terminal-title">
-                        <span class="session-user">user@host</span>:<span class="session-path">~/Downloads/OS CP 2/IntelliShell</span>
+                        <span class="session-user">user@intellios</span>:<span class="session-path">~/kernel/console</span>
                     </div>
                     <div class="terminal-actions">
-                        <button id="btn-clear-term" class="btn-icon" title="Clear Screen">
+                        <button id="btn-clear-term" class="btn-icon" title="Clear Screen" type="button">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                         </button>
                     </div>
@@ -88,8 +171,8 @@
 /_/_/\__,_/_/    /_/_/_/  /____/_/ /_/\___/_/_/   
                         </pre>
                         <div class="welcome-desc">
-                            <span class="highlight-cyan">[AI Shell Engine Active]</span> Natural language to low-level operating system command generator.<br>
-                            Type your request in plain English below, review the suggestion, and execute securely.
+                            <span class="highlight-yellow">[AI Shell Kernel Active]</span> Natural language to low-level operating system command generator.<br>
+                            Type your request in English below, review the translated shell command, and execute safely.
                         </div>
                     </div>
                 </div>
@@ -99,12 +182,12 @@
                     <!-- Quick Prompt Suggestions -->
                     <div class="quick-chips">
                         <span class="chips-label">Suggestions:</span>
-                        <button class="chip" data-prompt="show all files in the current folder">show all files</button>
-                        <button class="chip" data-prompt="show my ip address">show my ip</button>
-                        <button class="chip" data-prompt="check free disk space">check disk space</button>
-                        <button class="chip" data-prompt="show running processes">running processes</button>
-                        <button class="chip" data-prompt="where am i">where am i</button>
-                        <button class="chip chip-danger" data-prompt="delete a file">delete a file (safety check)</button>
+                        <button class="chip" data-prompt="show all files in the current folder" type="button">show all files</button>
+                        <button class="chip" data-prompt="show my ip address" type="button">show my ip</button>
+                        <button class="chip" data-prompt="check free disk space" type="button">check disk space</button>
+                        <button class="chip" data-prompt="show running processes" type="button">running processes</button>
+                        <button class="chip" data-prompt="where am i" type="button">where am i</button>
+                        <button class="chip chip-danger" data-prompt="delete a file" type="button">delete a file (safety check)</button>
                     </div>
 
                     <!-- Prompt Input Form -->
@@ -122,7 +205,7 @@
                         />
                         <button type="submit" id="btn-submit" class="btn-send">
                             <span>Ask Shell</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="22" y1="2" x2="11" y2="13"></line>
                                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                             </svg>
@@ -131,16 +214,19 @@
                 </div>
             </section>
 
-            <!-- Right: OS Concepts in Action & Metrics Dashboard -->
+            <!-- Right: OS Concepts in Action & Recent Session Commands -->
             <aside class="sidebar-dashboard">
-                <!-- OS Concept Live Visualizer -->
-                <div class="card-panel">
+
+                <!-- Card 1: OS Concepts in Action (Light Warm Card) -->
+                <div class="card-panel panel-light">
                     <div class="panel-header">
-                        <div class="panel-title">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
-                            <span>OS Concepts in Action</span>
+                        <div class="panel-title-group">
+                            <span class="panel-title">OS Concepts in Action</span>
+                            <span class="badge-live">LIVE TRACKER</span>
                         </div>
-                        <span class="badge-live">LIVE TRACKER</span>
+                        <button class="circle-arrow-btn" title="View Architecture" type="button">
+                            <span>↗</span>
+                        </button>
                     </div>
                     <div class="panel-body">
                         <div class="os-badge-list">
@@ -159,7 +245,7 @@
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
                                 </div>
                                 <div class="os-card-info">
-                                    <div class="os-card-name">Process Lifecycle Management</div>
+                                    <div class="os-card-name">Process Lifecycle</div>
                                     <div class="os-card-desc">Spawns child processes using CreateProcessA / fork() & exec().</div>
                                 </div>
                             </div>
@@ -170,7 +256,7 @@
                                 </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">Standard I/O Redirection</div>
-                                    <div class="os-card-desc">Remaps STDIN and STDOUT handles via STARTF_USESTDHANDLES / dup2().</div>
+                                    <div class="os-card-desc">Remaps STDIN and STDOUT handles via STARTF_USESTDHANDLES.</div>
                                 </div>
                             </div>
 
@@ -180,7 +266,7 @@
                                 </div>
                                 <div class="os-card-info">
                                     <div class="os-card-name">Process Synchronization</div>
-                                    <div class="os-card-desc">Parent waits on child exit with WaitForSingleObject / waitpid to prevent zombies.</div>
+                                    <div class="os-card-desc">Parent waits on child exit with WaitForSingleObject to prevent zombies.</div>
                                 </div>
                             </div>
 
@@ -189,7 +275,7 @@
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                                 </div>
                                 <div class="os-card-info">
-                                    <div class="os-card-name">File System System Calls</div>
+                                    <div class="os-card-name">Kernel System Calls</div>
                                     <div class="os-card-desc">Direct kernel calls: _chdir(), _getcwd(), and getenv() for context.</div>
                                 </div>
                             </div>
@@ -199,7 +285,7 @@
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                                 </div>
                                 <div class="os-card-info">
-                                    <div class="os-card-name">Security & Protection Ring</div>
+                                    <div class="os-card-name">Safety & Protection Ring</div>
                                     <div class="os-card-desc">Pre-execution regex interception for fork bombs, wipes, & formatting.</div>
                                 </div>
                             </div>
@@ -207,14 +293,14 @@
                     </div>
                 </div>
 
-                <!-- Recent Session Commands -->
-                <div class="card-panel">
-                    <div class="panel-header">
-                        <div class="panel-title">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-                            <span>Recent Session Commands</span>
+                <!-- Card 2: Recent Session Commands (Deep Charcoal Card matching reference image) -->
+                <div class="card-panel panel-dark">
+                    <div class="panel-header dark-header">
+                        <div class="panel-title-group">
+                            <span class="panel-title">Session History</span>
+                            <span class="badge-count" id="history-count">Active</span>
                         </div>
-                        <button id="btn-clear-history" class="btn-text">Clear</button>
+                        <button id="btn-clear-history" class="btn-text-dark" type="button">Clear</button>
                     </div>
                     <div class="panel-body">
                         <ul id="history-list" class="history-list">
@@ -222,6 +308,7 @@
                         </ul>
                     </div>
                 </div>
+
             </aside>
         </main>
     </div>
@@ -231,18 +318,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Edit Command Before Execution</h3>
-                <button id="btn-close-modal" class="modal-close">&times;</button>
+                <button id="btn-close-modal" class="modal-close" type="button">&times;</button>
             </div>
             <div class="modal-body">
-                <p>You can fine-tune the flags or parameters before the operating system runs it:</p>
+                <p class="modal-instruction">You can fine-tune flags or parameters before the operating system runs it:</p>
                 <div class="edit-input-wrapper">
                     <span class="edit-symbol">$</span>
                     <input type="text" id="modal-command-input" class="modal-input" />
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btn-modal-cancel" class="btn-secondary">Cancel</button>
-                <button id="btn-modal-run" class="btn-primary">Execute Edited Command</button>
+                <button id="btn-modal-cancel" class="btn-secondary" type="button">Cancel</button>
+                <button id="btn-modal-run" class="btn-primary" type="button">Execute Edited Command</button>
             </div>
         </div>
     </div>

@@ -445,6 +445,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderHistory() {
+        const countBadge = document.getElementById('history-count');
+        if (countBadge) countBadge.textContent = commandHistory.length > 0 ? (commandHistory.length + ' / 8') : 'Active';
         if (commandHistory.length === 0) {
             historyList.innerHTML = `<li class="history-empty">No commands executed yet</li>`;
             return;
